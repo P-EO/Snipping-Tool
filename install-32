@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DIRECTORY="$(dirname "$(dirname "$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )")")"
+
+function error {
+  echo -e "\\e[91m$1\\e[39m"
+  exit 1
+}
+
+rm -f Snipping-Tool_arm64.deb
+wget -O Snipping-Tool_arm64.deb https://github.com/P-EO/Snipping-Tool/releases/download/v0.10.1/Snipping-Tool-0.10.1-1.debian-10.arm64.deb || error 'Failed to download Snipping-Tool deb file'
+sudo apt install ./Snipping-Tool_arm64.deb -yf || error 'Failed to install Snipping-Tool'
+rm -f Snipping-Tool_arm64.deb
+
